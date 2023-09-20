@@ -1,8 +1,8 @@
-import { Component } from "react";
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
-import AddEditForm from "../Forms/AddEditForm";
+import React from "react";
+import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import AddUserForm from "../Forms/AddUserForm";
 
-class AddEditModal extends Component {
+class AddUserModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,30 +22,22 @@ class AddEditModal extends Component {
     let button = '';
     let title = '';
 
-    if (label === '編集') {
+    if (label === 'ユーザ登録') {
       button = <Button
         color="warning"
         onClick={this.toggle}
         style={{ float: "left", marginRight: "13px" }}>{label}
       </Button>
-      title = '編集';
-    } else {
-      button = <Button
-        color="success"
-        onClick={this.toggle}
-        style={{ float: "left", marginRight: "13px" }}>{label}
-      </Button>
-      title = '追加';
+      title = "ユーザ登録"
     }
-
     return (
       <div>
         {button}
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle} close={closeBtn}>{title}</ModalHeader>
           <ModalBody>
-            <AddEditForm
-              addItemToState={this.props.addItemToState}
+            <AddUserForm
+              addUserToState={this.props.addUserToState}
               updateState={this.props.updateState}
               toggle={this.toggle}
               item={this.props.item} />
@@ -56,4 +48,4 @@ class AddEditModal extends Component {
   }
 }
 
-export default AddEditModal;
+export default AddUserModal;

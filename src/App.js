@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'reactstrap'
 import { CSVLink } from "react-csv";
 import AccountsTable from './components/Tables/AccountsTable';
 import AddEditModal from './components/Modals/AddEditModal';
+import AddUserModal from './components/Modals/AddUserModal';
 
 class App extends Component {
   state = {
@@ -17,6 +18,13 @@ class App extends Component {
   };
 
   addItemToState = (item) => {
+    window.location.reload();
+    this.setState(prevState => ({
+      items: [...prevState.items, item]
+    }));
+  }
+
+  addUserToState = (item) => {
     window.location.reload();
     this.setState(prevState => ({
       items: [...prevState.items, item]
@@ -58,6 +66,7 @@ class App extends Component {
         </Row>
         <Row>
           <Col>
+            <AddUserModal buttonLabel="ユーザ登録" addUserToState={this.addUserToState} />
             <AddEditModal buttonLabel="追加" addItemToState={this.addItemToState} />
             {this.state.items.length > 0 &&
               <CSVLink
