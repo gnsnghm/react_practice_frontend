@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Button } from "reactstrap";
+import { Table, Button, Form, Input } from "reactstrap";
 import AddEditModal from "../Modals/AddEditModal";
 
 class AccountsTable extends Component {
@@ -47,20 +47,22 @@ class AccountsTable extends Component {
       items = '';
     }
     return (
-      <Table responsive hover>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>氏名</th>
-            <th>Email</th>
-            <th>電話番号</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {items}
-        </tbody>
-      </Table>
+      <>
+        <Table responsive hover>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>氏名</th>
+              <th>Email</th>
+              <th>電話番号</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {items}
+          </tbody>
+        </Table>
+      </>
     )
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Row, Col, Form, Input } from 'reactstrap'
 import { CSVLink } from "react-csv";
 import AccountsTable from './components/Tables/AccountsTable';
 import AddEditModal from './components/Modals/AddEditModal';
@@ -9,13 +9,31 @@ class App extends Component {
   state = {
     items: []
   }
-
   getItems() {
     fetch(process.env.REACT_APP_BACKEND_URL + '/crud')
       .then(response => response.json())
       .then(items => this.setState({ items }))
       .catch(err => console.log(err))
   };
+
+  getSearchItems = e => {
+    if (e.target.value !== '') {
+      fetch(process.env.REACT_APP_BACKEND_URL + '/search', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          fullname: e.target.value
+        })
+      })
+        .then(response => response.json())
+        .then(items => this.setState({ items }))
+        .catch(err => console.log(err))
+    } else {
+      this.getItems();
+    }
+  }
 
   addItemToState = (item) => {
     window.location.reload();
@@ -57,6 +75,13 @@ class App extends Component {
         <Row>
           <Col>
             <h1 style={{ margin: "13px" }}>User management app</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form>
+              <Input type="text" name="fullname" id="fullname" onChange={this.getSearchItems} />
+            </Form>
           </Col>
         </Row>
         <Row>
