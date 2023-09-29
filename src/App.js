@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Container, Row, Col, Form, Input } from 'reactstrap'
+import { Container, Nav, Row, Col, Form, Input } from 'reactstrap'
 import { CSVLink } from "react-csv";
 import AccountsTable from './components/Tables/AccountsTable';
 import AddEditModal from './components/Modals/AddEditModal';
@@ -71,45 +71,39 @@ class App extends Component {
 
   render() {
     return (
-      <Navbar>
-        <Nav className='mr-auto'>
-          <Nav.Link href="#">Home</Nav.Link>
-          <Container className="App">
-            <Row>
-              <Col>
-                <h1 style={{ margin: "13px" }}>User management app</h1>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Form>
-                  <Input type="text" name="fullname" id="fullname" onChange={this.getSearchItems} />
-                </Form>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <AccountsTable items={this.state.items} updateState={this.updateState} deleteItemFromState={this.deleteItemFromState} />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <AddUserModal buttonLabel="ユーザ登録" addUserToState={this.addUserToState} />
-                <AddEditModal buttonLabel="追加" addItemToState={this.addItemToState} />
-                {this.state.items.length > 0 &&
-                  <CSVLink
-                    className='btn btn-primary'
-                    filename={"accounts.csv"}
-                    data={this.state.items}>
-                    CSVエクスポート
-                  </CSVLink>
-                }
-              </Col>
-            </Row>
-          </Container>
-          <Nav.Link href="#login">Home</Nav.Link>
-        </Nav>
-      </Navbar>
+      <Container>
+        <Row>
+          <Col>
+            <h1 style={{ margin: "13px" }}>User management app</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form>
+              <Input type="text" name="fullname" id="fullname" onChange={this.getSearchItems} />
+            </Form>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <AccountsTable items={this.state.items} updateState={this.updateState} deleteItemFromState={this.deleteItemFromState} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <AddUserModal buttonLabel="ユーザ登録" addUserToState={this.addUserToState} />
+            <AddEditModal buttonLabel="追加" addItemToState={this.addItemToState} />
+            {this.state.items.length > 0 &&
+              <CSVLink
+                className='btn btn-primary'
+                filename={"accounts.csv"}
+                data={this.state.items}>
+                CSVエクスポート
+              </CSVLink>
+            }
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }
